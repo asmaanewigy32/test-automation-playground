@@ -1,23 +1,20 @@
 package com.qacart.todo.testcases;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.qacart.todo.factory.DriverFactory;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class ToDoTest {
+
+    private WebDriver driver;
 
     @Test
     public void shouldBeAbleToAddNewToDo()
     {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver=new DriverFactory().initializeDriver();
         driver.get("https://qacart-todo.herokuapp.com");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
         driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Qa-123456");
@@ -35,10 +32,8 @@ public class ToDoTest {
     @Test
     public void shouldBeAbleToDeleteToDo()
     {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver=new DriverFactory().initializeDriver();
         driver.get("https://qacart-todo.herokuapp.com");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
         driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Qa-123456");

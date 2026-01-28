@@ -17,7 +17,7 @@ public class ToDoPage extends BasePage {
     @FindBy(css="[data-testid=\"add\"]")
     private WebElement addButton;
 
-    @FindBy(css="data-testid=\"todo-text\"]")
+    @FindBy(css="[data-testid=\"todo-text\"]")
     private WebElement todoItem;
 
     @FindBy(css="[data-testid=\"delete\"]")
@@ -42,9 +42,10 @@ public class ToDoPage extends BasePage {
         return todoItem.getText();
     }
 
-    public void clickOnDeleteButton()
+    public ToDoPage clickOnDeleteButton()
     {
         deleteButton.click();
+        return this;
     }
 
     public boolean isNoTodoMassageDisplayed()

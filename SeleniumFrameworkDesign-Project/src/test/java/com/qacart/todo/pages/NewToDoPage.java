@@ -17,10 +17,11 @@ public class NewToDoPage extends BasePage {
     @FindBy(css="[data-testid=\"submit-newTask\"]")
     private WebElement newTodoSubmit;
 
-    public void addNewTodo(String item)
+    public ToDoPage addNewTask(String item)
     {
         newTodoInput.sendKeys(item);
         newTodoSubmit.click();
+        return new ToDoPage(driver);
     }
 
 }

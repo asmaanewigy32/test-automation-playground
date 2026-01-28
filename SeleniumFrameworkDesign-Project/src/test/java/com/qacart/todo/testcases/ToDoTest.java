@@ -5,7 +5,6 @@ import com.qacart.todo.pages.LoginPage;
 import com.qacart.todo.pages.NewToDoPage;
 import com.qacart.todo.pages.ToDoPage;
 import junit.framework.Assert;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class ToDoTest extends BaseTest {
@@ -16,16 +15,12 @@ public class ToDoTest extends BaseTest {
     {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.load();
-        loginPage.login("asmaa@example.com","Qa-123456");
+        ToDoPage toDoPage = loginPage.login("asmaa@example.com","Qa-123456");
 
-        ToDoPage toDoPage = new ToDoPage(driver);
-        toDoPage.clickOnPlusButton();
-
-        NewToDoPage newToDoPage = new NewToDoPage(driver);
-        newToDoPage.addNewTodo("Learn Selenium");
+        NewToDoPage newToDoPage = toDoPage.clickOnPlusButton();
+        toDoPage=newToDoPage.addNewTask("Learn Selenium");
 
         String actualResult=toDoPage.getTodoText();
-
         Assert.assertEquals("Learn Automation Testing",actualResult);
     }
 
@@ -34,15 +29,12 @@ public class ToDoTest extends BaseTest {
     {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.load();
-        loginPage.login("asmaa@example.com","Qa-123456");
+        ToDoPage toDoPage = loginPage.login("asmaa@example.com","Qa-123456");
 
-        ToDoPage toDoPage = new ToDoPage(driver);
-        toDoPage.clickOnPlusButton();
-
-        NewToDoPage newToDoPage = new NewToDoPage(driver);
-        newToDoPage.addNewTodo("Learn Selenium");
-
+        NewToDoPage newToDoPage = toDoPage.clickOnPlusButton();
+        toDoPage = newToDoPage.addNewTask("Learn Selenium");
         toDoPage.clickOnDeleteButton();
+
         boolean isNoToDoMassageIsDisplayed= toDoPage.isNoTodoMassageDisplayed();
         Assert.assertTrue(isNoToDoMassageIsDisplayed);
 

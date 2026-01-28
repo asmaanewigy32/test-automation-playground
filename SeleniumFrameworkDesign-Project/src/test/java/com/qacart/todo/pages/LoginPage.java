@@ -24,11 +24,12 @@ public class LoginPage extends BasePage {
     {
         driver.get("https://qacart-todo.herokuapp.com");
     }
-    public void login(String email, String password)
+    public ToDoPage login(String email, String password)
     {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         submitButton.click();
+        return new ToDoPage(driver);
     }
 
 }

@@ -2,6 +2,7 @@ package com.qacart.todo.testcases;
 
 import com.qacart.todo.base.BaseTest;
 import com.qacart.todo.pages.LoginPage;
+import com.qacart.todo.pages.NewToDoPage;
 import com.qacart.todo.pages.ToDoPage;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
@@ -19,9 +20,9 @@ public class ToDoTest extends BaseTest {
 
         ToDoPage toDoPage = new ToDoPage(driver);
         toDoPage.clickOnPlusButton();
-        //new todo page
-        driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
-        driver.findElement(By.cssSelector("[data-testid=\"submit-newTask\"]")).click();
+
+        NewToDoPage newToDoPage = new NewToDoPage(driver);
+        newToDoPage.addNewTodo("Learn Selenium");
 
         String actualResult=toDoPage.getTodoText();
 
@@ -38,9 +39,8 @@ public class ToDoTest extends BaseTest {
         ToDoPage toDoPage = new ToDoPage(driver);
         toDoPage.clickOnPlusButton();
 
-        //new todo page
-        driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
-        driver.findElement(By.cssSelector("[data-testid=\"submit-newTask\"]")).click();
+        NewToDoPage newToDoPage = new NewToDoPage(driver);
+        newToDoPage.addNewTodo("Learn Selenium");
 
         toDoPage.clickOnDeleteButton();
         boolean isNoToDoMassageIsDisplayed= toDoPage.isNoTodoMassageDisplayed();

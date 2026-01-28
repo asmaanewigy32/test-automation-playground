@@ -1,6 +1,7 @@
 package com.qacart.todo.testcases;
 
 import com.qacart.todo.base.BaseTest;
+import com.qacart.todo.pages.LoginPage;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -13,9 +14,8 @@ public class ToDoTest extends BaseTest {
     {
         driver.get("https://qacart-todo.herokuapp.com");
 
-        driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
-        driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Qa-123456");
-        driver.findElement(By.cssSelector("[data-testid=\"submit\"]")).click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("asmaa@example.com","asmaa@example.com");
 
         driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
@@ -30,9 +30,8 @@ public class ToDoTest extends BaseTest {
     {
         driver.get("https://qacart-todo.herokuapp.com");
 
-        driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
-        driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Qa-123456");
-        driver.findElement(By.cssSelector("[data-testid=\"submit\"]")).click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("asmaa@example.com","asmaa@example.com");
 
         driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");

@@ -2,6 +2,7 @@ package com.qacart.todo.testcases;
 
 import com.qacart.todo.base.BaseTest;
 import com.qacart.todo.pages.LoginPage;
+import com.qacart.todo.pages.ToDoPage;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -16,10 +17,13 @@ public class ToDoTest extends BaseTest {
         loginPage.load();
         loginPage.login("asmaa@example.com","Qa-123456");
 
-        driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
+        ToDoPage toDoPage = new ToDoPage(driver);
+        toDoPage.clickOnPlusButton();
+        //new todo page
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
         driver.findElement(By.cssSelector("[data-testid=\"submit-newTask\"]")).click();
-        String actualResult=driver.findElement(By.cssSelector("[data-testid=\"todo-text\"]")).getText();
+
+        String actualResult=toDoPage.getTodoText();
 
         Assert.assertEquals("Learn Automation Testing",actualResult);
     }
@@ -31,11 +35,15 @@ public class ToDoTest extends BaseTest {
         loginPage.load();
         loginPage.login("asmaa@example.com","Qa-123456");
 
-        driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
+        ToDoPage toDoPage = new ToDoPage(driver);
+        toDoPage.clickOnPlusButton();
+
+        //new todo page
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
         driver.findElement(By.cssSelector("[data-testid=\"submit-newTask\"]")).click();
-        driver.findElement(By.cssSelector("[data-testid=\"delete\"]")).click();
-        boolean isNoToDoMassageIsDisplayed=driver.findElement(By.cssSelector("[data-testid=\"no-todos\"]")).isDisplayed();
+
+        toDoPage.clickOnDeleteButton();
+        boolean isNoToDoMassageIsDisplayed= toDoPage.isNoTodoMassageDisplayed();
         Assert.assertTrue(isNoToDoMassageIsDisplayed);
 
     }

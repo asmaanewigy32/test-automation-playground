@@ -1,19 +1,16 @@
 package com.qacart.todo.testcases;
 
-import com.qacart.todo.factory.DriverFactory;
+import com.qacart.todo.base.BaseTest;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-public class ToDoTest {
+public class ToDoTest extends BaseTest {
 
-    private WebDriver driver;
 
     @Test
     public void shouldBeAbleToAddNewToDo()
     {
-        driver=new DriverFactory().initializeDriver();
         driver.get("https://qacart-todo.herokuapp.com");
 
         driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
@@ -26,13 +23,11 @@ public class ToDoTest {
         String actualResult=driver.findElement(By.cssSelector("[data-testid=\"todo-text\"]")).getText();
 
         Assert.assertEquals("Learn Automation Testing",actualResult);
-        driver.quit();
     }
 
     @Test
     public void shouldBeAbleToDeleteToDo()
     {
-        driver=new DriverFactory().initializeDriver();
         driver.get("https://qacart-todo.herokuapp.com");
 
         driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("asmaa@example.com");
@@ -45,7 +40,6 @@ public class ToDoTest {
         driver.findElement(By.cssSelector("[data-testid=\"delete\"]")).click();
         boolean isNoToDoMassageIsDisplayed=driver.findElement(By.cssSelector("[data-testid=\"no-todos\"]")).isDisplayed();
         Assert.assertTrue(isNoToDoMassageIsDisplayed);
-        driver.quit();
 
     }
 }

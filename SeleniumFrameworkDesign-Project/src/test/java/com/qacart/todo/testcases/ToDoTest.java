@@ -12,10 +12,9 @@ public class ToDoTest extends BaseTest {
     @Test
     public void shouldBeAbleToAddNewToDo()
     {
-        driver.get("https://qacart-todo.herokuapp.com");
-
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("asmaa@example.com","asmaa@example.com");
+        loginPage.load();
+        loginPage.login("asmaa@example.com","Qa-123456");
 
         driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");
@@ -28,10 +27,9 @@ public class ToDoTest extends BaseTest {
     @Test
     public void shouldBeAbleToDeleteToDo()
     {
-        driver.get("https://qacart-todo.herokuapp.com");
-
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("asmaa@example.com","asmaa@example.com");
+        loginPage.load();
+        loginPage.login("asmaa@example.com","Qa-123456");
 
         driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
         driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Automation Testing");

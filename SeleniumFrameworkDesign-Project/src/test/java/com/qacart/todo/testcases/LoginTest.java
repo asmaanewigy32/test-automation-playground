@@ -11,8 +11,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void shouldBeAbleToLoginWithEmailAndPassword()
     {
-        driver.get("https://qacart-todo.herokuapp.com");
         LoginPage loginPage = new LoginPage(driver);
+        loginPage.load();
         loginPage.login("asmaa@example.com","Qa-123456");
 
         boolean isWelcomeDisplayed= driver.findElement(By.cssSelector("[data-testid=\"welcome\"]")).isDisplayed();

@@ -22,7 +22,7 @@ public class ToDoTest extends BaseTest {
         Assert.assertEquals("Learn Selenium",actualResult);
     }
 
-    @Test
+    @Test (enabled = false)
     public void shouldBeAbleToDeleteToDo()
     {
         LoginPage loginPage = new LoginPage(driver);

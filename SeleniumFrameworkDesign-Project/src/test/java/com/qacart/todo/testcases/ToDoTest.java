@@ -2,6 +2,7 @@ package com.qacart.todo.testcases;
 
 import com.qacart.todo.base.BaseTest;
 import com.qacart.todo.pages.LoginPage;
+import com.qacart.todo.utils.ConfigUtils;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ public class ToDoTest extends BaseTest {
         String actualResult=
                 loginPage
                         .load()
-                        .login("asmaa@example.com","Qa-123456")
+                        .login(ConfigUtils.getInstance().getEmail(), ConfigUtils.getInstance().getPassword())
                         .clickOnPlusButton()
                         .addNewTask("Learn Selenium")
                         .getTodoText();
@@ -29,7 +30,7 @@ public class ToDoTest extends BaseTest {
         boolean isNoToDoMassageIsDisplayed=
                 loginPage
                         .load()
-                        .login("asmaa@example.com","Qa-123456")
+                        .login(ConfigUtils.getInstance().getEmail(), ConfigUtils.getInstance().getPassword())
                         .clickOnPlusButton()
                         .addNewTask("Learn Selenium")
                         .clickOnDeleteButton()

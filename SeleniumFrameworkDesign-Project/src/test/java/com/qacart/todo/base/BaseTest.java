@@ -2,6 +2,7 @@ package com.qacart.todo.base;
 
 import com.qacart.todo.factory.DriverFactory;
 import com.qacart.todo.utils.CookiesUtils;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.http.Cookie;
 import org.apache.commons.io.FileUtils;
@@ -13,7 +14,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class BaseTest {
@@ -40,19 +43,36 @@ public class BaseTest {
     @AfterMethod
     public void tearDown(ITestResult result)
     {
-        String testCaseName = result.getTestName();
-        File destfile = new File("target" + File.separator + "screenshots" + File.separator + testCaseName+".png");
-        takeScreenshots(destfile);
-        getDriver().quit();
+        // Get test method name instead of test name
+        String testCaseName = result.getMethod().getMethodName();
+
+        // Handle null or empty test case name
+        if (testCaseName == null || testCaseName.isEmpty()) {
+            testCaseName = "test_" + System.currentTimeMillis();
+        }
+
+        File destFile = new File("target" + File.separator + "screenshots" + File.separator + testCaseName + ".png");
+        takeScreenshot(destFile);
+
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
+
     }
 
-    public void takeScreenshots(File destfile)
+    public void takeScreenshot(File destFile)
     {
-        File file = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(file,destfile);
+            File sourceFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(sourceFile, destFile);
+
+            // Attach screenshot to Allure report
+            try (InputStream is = new FileInputStream(destFile)) {
+                Allure.addAttachment("screenshot", is);
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Failed to take screenshot: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

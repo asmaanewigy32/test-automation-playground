@@ -5,13 +5,17 @@ import com.qacart.todo.api.TasksApi;
 import com.qacart.todo.base.BaseTest;
 import com.qacart.todo.pages.NewToDoPage;
 import com.qacart.todo.pages.ToDoPage;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
+
+@Feature("Todo")
 public class ToDoTest extends BaseTest {
 
-
-    @Test
+    @Story("Add Todo")
+    @Test (description = "Should be able to add a new todo correctly")
     public void shouldBeAbleToAddNewToDo()
     {
         RegisterApi registerApi = new RegisterApi();
@@ -30,7 +34,8 @@ public class ToDoTest extends BaseTest {
         Assert.assertEquals("Learn Selenium",actualResult);
     }
 
-    @Test
+    @Story("Delete Todo")
+    @Test (description = "Should be able to delete todo correctly")
     public void shouldBeAbleToDeleteToDo()
     {
         RegisterApi registerApi = new RegisterApi();

@@ -1,6 +1,7 @@
 package com.qacart.todo.pages;
 
 import com.qacart.todo.base.BasePage;
+import com.qacart.todo.utils.ConfigUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,4 +54,9 @@ public class ToDoPage extends BasePage {
        return noTodosMassage.isDisplayed();
     }
 
+    public ToDoPage load()
+    {
+        driver.get(ConfigUtils.getInstance().getBaseUrl()+"/todo");
+        return this;
+    }
 }

@@ -1,9 +1,13 @@
 package com.qacart.todo.base;
 
 import com.qacart.todo.factory.DriverFactory;
+import com.qacart.todo.utils.CookiesUtils;
+import io.restassured.http.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import java.util.List;
 
 public class BaseTest {
 
@@ -19,5 +23,14 @@ public class BaseTest {
     public void tearDown()
     {
         driver.quit();
+    }
+
+    public void injectCookiesToBrowser(List<Cookie> restAssuredCookies)
+    {
+        List<org.openqa.selenium.Cookie> seleniumCookies=CookiesUtils.convertRestAssuredCookiesToSeleniumCookies(restAssuredCookies);
+        for(org.openqa.selenium.Cookie cookie:seleniumCookies)
+        {
+            driver.manage().addCookie(cookie);
+        }
     }
 }

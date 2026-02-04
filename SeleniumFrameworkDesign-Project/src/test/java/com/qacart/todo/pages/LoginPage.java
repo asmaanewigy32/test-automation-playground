@@ -2,6 +2,7 @@ package com.qacart.todo.pages;
 
 import com.qacart.todo.base.BasePage;
 import com.qacart.todo.utils.ConfigUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,11 +22,14 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step ("Load the login page")
     public LoginPage load()
     {
         driver.get(ConfigUtils.getInstance().getBaseUrl());
         return this;
     }
+
+    @Step ("Login to the todo application ")
     public ToDoPage login(String email, String password)
     {
         emailInput.sendKeys(email);

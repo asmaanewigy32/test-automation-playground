@@ -3,6 +3,7 @@ package com.qacart.todo.pages;
 import com.qacart.todo.base.BasePage;
 import com.qacart.todo.configer.EndPoints;
 import com.qacart.todo.utils.ConfigUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ public class NewToDoPage extends BasePage {
     @FindBy(css="[data-testid=\"submit-newTask\"]")
     private WebElement newTodoSubmit;
 
+    @Step
     public ToDoPage addNewTask(String item)
     {
         newTodoInput.sendKeys(item);
@@ -26,6 +28,7 @@ public class NewToDoPage extends BasePage {
         return new ToDoPage(driver);
     }
 
+    @Step
     public NewToDoPage load()
     {
         driver.get(ConfigUtils.getInstance().getBaseUrl()+ EndPoints.API_NEWTODO_ENDPOINT);

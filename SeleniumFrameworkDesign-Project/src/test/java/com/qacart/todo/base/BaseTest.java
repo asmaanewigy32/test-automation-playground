@@ -2,6 +2,7 @@ package com.qacart.todo.base;
 
 import com.qacart.todo.factory.DriverFactory;
 import com.qacart.todo.utils.CookiesUtils;
+import io.qameta.allure.Step;
 import io.restassured.http.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -37,6 +38,7 @@ public class BaseTest {
         getDriver().quit();
     }
 
+    @Step
     public void injectCookiesToBrowser(List<Cookie> restAssuredCookies)
     {
         List<org.openqa.selenium.Cookie> seleniumCookies=CookiesUtils.convertRestAssuredCookiesToSeleniumCookies(restAssuredCookies);

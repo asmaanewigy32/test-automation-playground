@@ -1,9 +1,10 @@
 package com.qacart.todo.api;
 
+import com.qacart.todo.configer.EndPoints;
 import com.qacart.todo.objects.User;
+import com.qacart.todo.utils.ConfigUtils;
 import com.qacart.todo.utils.UserUtils;
 import io.restassured.http.Cookie;
-import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 
 import java.util.List;
@@ -38,12 +39,12 @@ public class RegisterApi {
     {
         User user = UserUtils.generateRandomUser();
         Response response = given()
-                                    .baseUri("https://qacart-todo.herokuapp.com")
+                                    .baseUri(ConfigUtils.getInstance().getBaseUrl())
                                     .header("Content-Type", "application/json")
                                     .body(user)
                                     .log().all()
                             .when()
-                                    .post("/api/v1/users/register")
+                                    .post(EndPoints.API_REGISTER_ENDPOINT)
                             .then()
                                     .log().all()
                                     .extract().response();

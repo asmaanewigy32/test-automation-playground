@@ -11,18 +11,30 @@ import java.util.List;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    protected ThreadLocal<WebDriver>  driver= new ThreadLocal<>();
+
+    public void setDriver(WebDriver driver)
+    {
+        this.driver.set(driver);
+    }
+
+    public WebDriver getDriver()
+    {
+        return this.driver.get();
+    }
 
     @BeforeMethod
     public void setUp()
     {
-         driver = new DriverFactory().initializeDriver();
+         WebDriver driver = new DriverFactory().initializeDriver();
+         setDriver(driver);
+
     }
 
     @AfterMethod
     public void tearDown()
     {
-        driver.quit();
+        getDriver().quit();
     }
 
     public void injectCookiesToBrowser(List<Cookie> restAssuredCookies)
@@ -30,7 +42,7 @@ public class BaseTest {
         List<org.openqa.selenium.Cookie> seleniumCookies=CookiesUtils.convertRestAssuredCookiesToSeleniumCookies(restAssuredCookies);
         for(org.openqa.selenium.Cookie cookie:seleniumCookies)
         {
-            driver.manage().addCookie(cookie);
+            getDriver().manage().addCookie(cookie);
         }
     }
 }

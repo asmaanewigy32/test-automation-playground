@@ -17,7 +17,7 @@ public class ToDoTest extends BaseTest {
         RegisterApi registerApi = new RegisterApi();
         registerApi.register();
 
-        NewToDoPage newToDoPage = new NewToDoPage(driver);
+        NewToDoPage newToDoPage = new NewToDoPage(getDriver());
         newToDoPage.load();
         //Selenium Best practices --> You should visit your webpage before and after adding the cookies
         injectCookiesToBrowser(registerApi.getRestAssuredCookies());
@@ -39,7 +39,7 @@ public class ToDoTest extends BaseTest {
         TasksApi tasksApi = new TasksApi();
         tasksApi.addTask(registerApi.getAccessToken());
 
-        ToDoPage ToDoPage = new ToDoPage(driver);
+        ToDoPage ToDoPage = new ToDoPage(getDriver());
         ToDoPage.load();
         injectCookiesToBrowser(registerApi.getRestAssuredCookies());
         boolean isNoToDoMassageIsDisplayed = ToDoPage

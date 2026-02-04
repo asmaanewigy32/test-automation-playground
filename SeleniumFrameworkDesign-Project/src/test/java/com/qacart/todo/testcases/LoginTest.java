@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void shouldBeAbleToLoginWithEmailAndPassword()
     {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         boolean isWelcomeDisplayed= loginPage
                                             .load()
                                             .login(ConfigUtils.getInstance().getEmail(), ConfigUtils.getInstance().getPassword())

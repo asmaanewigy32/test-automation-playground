@@ -4,10 +4,16 @@ import com.qacart.todo.factory.DriverFactory;
 import com.qacart.todo.utils.CookiesUtils;
 import io.qameta.allure.Step;
 import io.restassured.http.Cookie;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class BaseTest {
@@ -31,11 +37,23 @@ public class BaseTest {
          setDriver(driver);
 
     }
-
     @AfterMethod
-    public void tearDown()
+    public void tearDown(ITestResult result)
     {
+        String testCaseName = result.getTestName();
+        File destfile = new File("target" + File.separator + "screenshots" + File.separator + testCaseName+".png");
+        takeScreenshots(destfile);
         getDriver().quit();
+    }
+
+    public void takeScreenshots(File destfile)
+    {
+        File file = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file,destfile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Step
